@@ -1,0 +1,19 @@
+{% set domain = 'theserverlessway.com' %}
+
+Modules:
+  - path: modules/dns
+    template: hosted_zone
+    vars:
+      name: {{ domain }}
+  - path: modules/dns
+    template: google_mx_records
+    vars:
+      source: {{ domain }}
+      hostedZone: {{ domain }}
+  - path: modules/dns
+    template: txt
+    vars:
+      source: {{ domain }}
+      hostedZone: {{ domain }}
+      targets:
+        - "v=spf1 include:_spf.google.com ~all"
