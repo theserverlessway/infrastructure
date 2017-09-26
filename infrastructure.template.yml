@@ -17,3 +17,4 @@ Modules:
       hostedZone: {{ domain }}
       targets:
         - "v=spf1 include:_spf.google.com ~all"
+        - "google-site-verification=3MV92Rf-ngymkC61LH11tlC24n4-HBa1fH6zqYe7ZFU"
