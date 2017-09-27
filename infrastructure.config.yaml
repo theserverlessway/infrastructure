@@ -1,1 +1,3 @@
 stack: tslw-infrastructure
+vars:
+  domain: theserverlessway.com

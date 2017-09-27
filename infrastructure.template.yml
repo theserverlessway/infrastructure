@@ -1,5 +1,3 @@
-{% set domain = 'theserverlessway.com' %}
-
 Modules:
   - path: modules/dns
     template: hosted_zone
