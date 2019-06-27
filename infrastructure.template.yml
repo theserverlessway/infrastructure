@@ -1,22 +1,27 @@
-Modules:
-  - path: modules/dns
-    template: hosted_zone
-    vars:
-      name: {{ domain }}
-  - path: modules/dns
-    template: google_mx_records
-    vars:
-      source: {{ domain }}
-      hostedZone: {{ domain }}
-  - path: modules/dns
-    template: txt
-    vars:
-      source: {{ domain }}
-      hostedZone: {{ domain }}
-      targets:
+Resources:
+  HostedZone:
+    From: Modules::DNS::Hosted_Zone
+    Properties:
+      Name: {{ Domain }}
+  GoogleMxRecords:
+    From: Modules::DNS::Google_MX_Records
+    Properties:
+      Source: {{ Domain }}
+      HostedZone: {{ Domain }}
+  TXT:
+    From: Modules::DNS::TXT
+    Properties:
+      Source: {{ Domain }}
+      HostedZone: {{ Domain }}
+      Targets:
         - "v=spf1 include:_spf.google.com ~all"
         - "google-site-verification=3MV92Rf-ngymkC61LH11tlC24n4-HBa1fH6zqYe7ZFU"
-  - path: modules/cloudfront-web-bucket
-  - path: modules/web_bucket
-    vars:
-      domain: development.{{ domain }}
+  CloudfrontDevelopment:
+    From: Modules::cloudfront-web-bucket
+    Properties:
+      HostedZone: {{ Domain | resource }}
+      Domain: dev.{{Domain}}
+
+  Cloudfront:
+    From: Modules::cloudfront-web-bucket
+
