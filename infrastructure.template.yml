@@ -25,3 +25,10 @@ Resources:
   Cloudfront:
     From: Modules::cloudfront-web-bucket
 
+  Blog:
+    From: Modules::DNS::Cname
+    Properties:
+      Source: blog.theserverlessway.com
+      Targets:
+        - theserverlessway.ghost.io
+
